@@ -129,7 +129,7 @@ It basically provides third-party extension point between dispatching a action, 
 Use middleware for logging, crash reporting, performing asynchronous tasks etc.
 To use middleware in our app redux library provides us with the function called applymiddleware to apply middleware
 
-*MiddleWare syntax*
+_MiddleWare syntax_
 
 npm install redux-logger(or anyother middlware you want for logger it is going to log everything for us in the console)
 
@@ -140,4 +140,50 @@ const logger = reduxLogger.createLogger();
 After this introduce middleware to the store
 const store = createStore(rootReducer, applyMiddleware(logger));
 
+**Asynchronous Actions**
+Till now we have been working with the synchronous actions
+As soon as an action was dispatched, the state was immediately updated.
+If you disptach the BUY_CAKE action, the numOfCakes was right away decremented by 1.
+Same goes with BUY_ICECREAM action as well.
+
+_Now getting into Aynchronous Actions_
+Asynchronous API calls to fetch data from an end point and use that data in your application.
+
+_Our Application_
+The app we are going to build is going to fetch a list of users from an API end point and stores it in the redux store.
+
+**State**
+State of our application is going to look like
+state is going to have a loading flag which is going to tell us about the data being fetched or not.
+If you have a UI this flag will help you display a loading spinner in your component.
+Now we have the data as an empty array to store the data we are going to get from the api that is list of users.
+We also have an error: it will be goving us an error if in case out api fails to load or fetch the data.This message can be used to display the msg to the user in case of not fetching the data.
+
+state = {
+loading: true,
+data: [],
+error: '',
+}
+
+loading: Display loading spinner in your component.
+Data: List of Users.
+error: Display error to the user.
+
+**Actions**
+FETCH_USERS_REQUEST - Fetch list of users
+The second and third action are dependent on the first action.
+FETCH_USERS_SUCCESS - Fetched Successfully.
+FETCH_USERS_FAILURE - Error fetching the data.
+
+**Reducers**
+case: FETCH_USERS_REQUEST
+loading: true
+
+case: FETCH_USERS_SUCCESS
+loading: false
+users: data(from API)
+
+case: FETCH_USERS_FAILURE
+loading: false
+error: error (from API)
 
