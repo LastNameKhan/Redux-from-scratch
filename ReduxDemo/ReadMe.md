@@ -84,3 +84,60 @@ Allows access to state via getState()
 Allows state to be updated via dispatch(action)
 Register to listneners via subscribe(listener)
 Handles unregistering of listeners via the function returned by subscribe(listener).It is executed any time the state in the redux store changes.
+
+**Combine Reducers**
+const combineReducers = redux.combineReducers;
+It basically helps us in working with the two reducersto simplify our App.
+For this we can have two action creators.Every action creator will have its own way to work out and some intial state.
+
+intial state is going to be
+const intialCakeState = {
+numOfCakes: 10,
+};
+
+const intialIceCreamState = {
+numOfIceCreams: 20,
+};
+
+Action Creators are going to be
+function buyCake() {
+return {
+type: BUY_CAKE,
+info: "First redux action",
+};
+}
+
+function buyIceCream() {
+return {
+type: BUY_ICECREAM,
+};
+}
+
+We will be having two reducer functions seperately for every action which is
+cakeReducer and IceCreamReducer
+
+In this manner we will wrap out reducer into single object with respective key value pairs
+const rootReducer = combineReducers({
+cake: cakeReducer,
+iceCream: iceCreamReducer,
+});
+
+**Middleware**
+It is used to implement Redux with some multiple functionality.
+To add extra features to the redux we will be using middleware.
+It basically provides third-party extension point between dispatching a action, and the moment it reaches the reducer.
+Use middleware for logging, crash reporting, performing asynchronous tasks etc.
+To use middleware in our app redux library provides us with the function called applymiddleware to apply middleware
+
+*MiddleWare syntax*
+
+npm install redux-logger(or anyother middlware you want for logger it is going to log everything for us in the console)
+
+const applyMiddleware = redux.applyMiddleware;
+const reduxLogger = require("redux-logger");
+const logger = reduxLogger.createLogger();
+
+After this introduce middleware to the store
+const store = createStore(rootReducer, applyMiddleware(logger));
+
+
