@@ -187,3 +187,31 @@ case: FETCH_USERS_FAILURE
 loading: false
 error: error (from API)
 
+const intialState = {
+  loading: false,
+  users: [],
+  error: "",
+};
+
+const reducer = (state = intialState, action) => {
+  switch (action.type) {
+    case FETCH_USERS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case FETCH_USERS_SUCCESS:
+      return {
+        loading: false,
+        users: action.payload,
+        error: "",
+      };
+    case FETCH_USERS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        users: [],
+        error: action.payload,
+      };
+  }
+};
