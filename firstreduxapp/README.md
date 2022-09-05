@@ -1,4 +1,4 @@
-**Redux:-**Redux is the predixtable state managemnet tool.
+**Redux:-**Redux is the predictable state managemnet tool.
 It is for Javascript Apps.
 It is a state contianer.
 It is Predictable.
